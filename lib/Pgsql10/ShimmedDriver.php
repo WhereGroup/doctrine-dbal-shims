@@ -24,7 +24,7 @@ class ShimmedDriver extends Driver
          * DBAL 2.7 introduced full support for PostgreSQL 10. We do not need to act
          * on >= 2.7. In fact, this entire method should not execute on >= 2.7, because this
          * Driver replacement class should not have been registered.
-         * @see AutoShimAllPass::autoShimPsql10Support takes care of that
+         * @see AutoShimAllPass::process takes care of that
          * We (re-)check this condition here anyway, to support other means of integration.
          */
         if (version_compare(\Doctrine\DBAL\Version::VERSION, '2.7-dev', '<') && $major >= 10) {
