@@ -12,7 +12,7 @@ class ShimPgsql10DriverPass implements AutoShimPassInterface
         /**
          * Note: DBAL 2.7 provides full, official support for PostgreSQL 10,
          * and does so much more robustly than our minimal shim, which only
-         * really attempts to work around doctrine schema migration errors
+         * really attempts to work around doctrine schema update errors
          * See @link https://github.com/doctrine/dbal/releases/tag/v2.7.0
           */
         return version_compare(\Doctrine\DBAL\Version::VERSION, '2.7-dev', '<');

@@ -5,10 +5,10 @@ The Doctrine DBAL project will perform no further maintenance on older release l
 is a completely agreeable stance. The onus of work should lie with those still requiring support for obsolete
 versions.
 
-## PostgreSQL 10 schema migration support
+## PostgreSQL 10 schema update support
 Included is a slightly extended PostgreSQL DBAL driver, with the sole purpose of returning a slightly extended schema
 manager on PostgreSQL server >= 10. This fixes the `SQLSTATE[42703]: Undefined column: 7 ERROR: column "min_value" does not exist`
-error commonly observed when attempting to run schema migrations.
+error commonly observed when attempting to run a `doctrine:schema:update` command.
 
 See [(rejected) DBAL PR#3587](https://github.com/doctrine/dbal/pull/3587) for further context. 
 
