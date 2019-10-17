@@ -7,6 +7,13 @@ namespace Wheregroup\DoctrineDbalShims\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * Static methods required on ShimPass.
+ * PHP < 7 does not agree with the utility of abstract static methods, but allows them
+ * in interfaces.
+ *
+ * @internal
+ */
 interface ShimPassInterface extends CompilerPassInterface
 {
     /**

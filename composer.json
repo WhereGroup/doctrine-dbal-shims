@@ -11,6 +11,6 @@
     "psr-4": { "Wheregroup\\DoctrineDbalShims\\": "lib" }
   },
   "suggest": {
-    "doctrine/dbal-bundle": "To use ShimmedConnectionFactory and AutoShimAllPass"
+    "doctrine/dbal-bundle": "To use ShimmedConnectionFactory and compiler passes"
   }
 }
