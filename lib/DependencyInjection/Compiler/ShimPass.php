@@ -7,7 +7,7 @@ namespace Wheregroup\DoctrineDbalShims\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-abstract class ShimPass implements AutoShimPassInterface
+abstract class ShimPass implements ShimPassInterface
 {
     /**
      * Registers the compiler pass (invariantly) to the container builder.
