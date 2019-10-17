@@ -54,8 +54,14 @@ public function buildContainer()
 }
 ```
 
-Direct usages of DBAL, i.e. bypassing or completely without Symfony integration, can still use the driver shims, but will have to provide
-the appropriate `driverClass` option by some other means (connection configuration or code).
+### Standalone DBAL
+Direct usages of DBAL, i.e. bypassing or completely without Symfony integration, can not rely on the provided container registration
+and compiler passes.
+
+To use the PostgreSQL driver extension, you would have to inject the appropriate `driverClass` option by some other means (connection
+configuration or code).
+
+The OnDemandOracleSessionInit subscriber instance needs to be added to the connection's event manager to come into effect.
 
 ## Other considerations
 We have opted to use runtime DBAL version detection over code-exclusionary composer conflict rules due to
