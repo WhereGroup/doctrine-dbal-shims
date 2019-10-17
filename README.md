@@ -16,6 +16,14 @@ See [(rejected) DBAL PR#3587](https://github.com/doctrine/dbal/pull/3587) for fu
 and in a much more complete and robust fashion. For this reason, if this shim is installed alongside DBAL >= 2.7, it
 auto-disables its replacement logic and lets upstream DBAL take over completely.
 
+## Oracle session variable preinitialization
+Included is an event subscriber that automatically sets Oracle session variables required by DBAL and Doctrine ORM to
+work properly (date formats etc).
+
+Unlike the DBAL default implementation, this event subscriber does not need additional configuration to limit itself to
+certain named connections, in the presence of non-Oracle DBAL connections. This makes it easier to use in mixed
+multi-connection setups.
+
 ## Dependencies
 We only require `doctrine/dbal:^2` and PHP >= 5.3.
 
