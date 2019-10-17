@@ -40,6 +40,15 @@ class AutoShimAllPass implements AutoShimPassInterface
     {
         return array(
             new ShimPgsql10DriverPass(),
+            new AddOracleSesssionInitPass(),
         );
+    }
+
+    public static function register(ContainerBuilder $container)
+    {
+        $self = new static();
+        foreach ($self->getAllShimPasses($container) as $pass) {
+            $pass->register($container);
+        }
     }
 }

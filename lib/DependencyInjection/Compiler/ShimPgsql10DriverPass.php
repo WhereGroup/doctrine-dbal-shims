@@ -5,7 +5,7 @@ namespace Wheregroup\DoctrineDbalShims\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ShimPgsql10DriverPass implements AutoShimPassInterface
+class ShimPgsql10DriverPass extends ShimPass
 {
     public function isShimRequired(ContainerBuilder $container)
     {
