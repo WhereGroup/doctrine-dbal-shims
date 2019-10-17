@@ -19,18 +19,18 @@ auto-disables its replacement logic and lets upstream DBAL take over completely.
 ## Dependencies
 We only require `doctrine/dbal:^2` and PHP >= 5.3.
 
-ShimmedConnectionFactory and AutoShimAllPass can only reasonably be used on top of the suggested [doctrine/doctrine-bundle](https://packagist.org/packages/doctrine/doctrine-bundle).
+ShimmedConnectionFactory and PassIndex can only reasonably be used on top of the suggested [doctrine/doctrine-bundle](https://packagist.org/packages/doctrine/doctrine-bundle).
 
 ## Usage
-Even with `doctrine/dbal-bundle` installed, shim registration is in no way automatic. You will need to register the AutoShimAllPass in
-the build method of either the kernel or a bundle of your choosing.
+Even with `doctrine/dbal-bundle` installed, shim registration is in no way automatic. You will need to `register` individual
+compiler passes, or call autoRegisterAll on the PassIndex, in the build method of either the kernel or a bundle of your choosing.
 
 ```php
 # Bundle class
 public function build(ContainerBuilder $container)
 {
     <...>
-    $container->addCompilerPass(new AutoShimAllPass());
+    PassIndex::autoRegisterAll($container);
     <...>
 }
 ```
@@ -40,7 +40,7 @@ public function buildContainer()
 {
     $container = parent::buildContainer();
     <...>
-    $container->addCompilerPass(new AutoShimAllPass());
+    PassIndex::autoRegisterAll($container);
     <...>
     return $container;
 }
@@ -53,6 +53,3 @@ the appropriate `driverClass` option by some other means (connection configurati
 We have opted to use runtime DBAL version detection over code-exclusionary composer conflict rules due to
 * unclear semantic versioning future of this package in the presence of conflict rule sets
 * other potential shimming candidates (Oracle, Sqlite) with very different base DBAL version interactions
-
-AutoShimAllPass is written with some apparent redundancies that should allow later inclusion of other shim candidates, in a
-way that would be completely transparent to its users.
