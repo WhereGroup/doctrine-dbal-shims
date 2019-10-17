@@ -14,7 +14,7 @@ class PassIndex
 {
     /**
      * @param ContainerBuilder $container
-     * @return AutoShimPassInterface[]
+     * @return ShimPass[]
      */
     public static function getAllPasses(ContainerBuilder $container)
     {
@@ -27,9 +27,7 @@ class PassIndex
     public static function autoRegisterAll(ContainerBuilder $container)
     {
         foreach (static::getAllPasses($container) as $pass) {
-            if ($pass->isShimRequired($container)) {
-                $pass->register($container);
-            }
+            $pass->autoRegister($container);
         }
     }
 }

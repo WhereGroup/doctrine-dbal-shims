@@ -9,9 +9,26 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 abstract class ShimPass implements AutoShimPassInterface
 {
+    /**
+     * Registers the compiler pass (invariantly) to the container builder.
+     * @param ContainerBuilder $container
+     */
     public static function register(ContainerBuilder $container)
     {
         $container->addCompilerPass(new static());
+    }
+
+    /**
+     * Registers the compiler pass to the container builder ONLY IF it
+     * is required / applicable to current DBAL setup.
+     *
+     * @param ContainerBuilder $container
+     */
+    public static function autoRegister(ContainerBuilder $container)
+    {
+        if (static::isShimRequired($container)) {
+            static::register($container);
+        }
     }
 
     /**
