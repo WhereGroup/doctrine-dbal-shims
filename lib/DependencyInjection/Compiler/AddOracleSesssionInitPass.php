@@ -18,7 +18,7 @@ class AddOracleSesssionInitPass extends ShimPass
         $this->fileLocator = new FileLocator(realpath(__DIR__ . '/../../Resources/config')); ///../Resources/config'));
     }
 
-    public function isShimRequired(ContainerBuilder $container)
+    public static function isShimRequired(ContainerBuilder $container)
     {
         // Can't hurt
         return true;

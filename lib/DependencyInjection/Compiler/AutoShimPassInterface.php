@@ -13,7 +13,7 @@ interface AutoShimPassInterface extends CompilerPassInterface
      * @param ContainerBuilder $container
      * @return boolean
      */
-    public function isShimRequired(ContainerBuilder $container);
+    public static function isShimRequired(ContainerBuilder $container);
 
     /**
      * @param ContainerBuilder $container

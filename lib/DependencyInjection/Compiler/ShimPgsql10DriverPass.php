@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ShimPgsql10DriverPass extends ShimPass
 {
-    public function isShimRequired(ContainerBuilder $container)
+    public static function isShimRequired(ContainerBuilder $container)
     {
         /**
          * Note: DBAL 2.7 provides full, official support for PostgreSQL 10,
