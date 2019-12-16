@@ -26,20 +26,41 @@ class ShimmedConnectionFactory extends ConnectionFactory
      */
     public function createConnection(array $params, Configuration $config = null, EventManager $eventManager = null, array $mappingTypes = array())
     {
-        // detect PostgreSQL driver code or driver class
-        /** @see DriverManager::$_driverMap */
-        if (isset($params['driver'])) {
-            $isPgsql = $params['driver'] === 'pdo_pgsql';
-        } elseif (isset($params['driverClass'])) {
-            $isPgsql = $params['driverClass'] === 'Doctrine\DBAL\Driver\PDOPgSql\Driver';
-        } else {
-            $isPgsql = false;
-        }
-        if ($isPgsql) {
+        if ($this->detectPostgreSQL($params)) {
             unset($params['driver']);
             $params['driverClass'] = 'Wheregroup\DoctrineDbalShims\Pgsql10\ShimmedDriver';
+            if (isset($params['url']) && false !== strpos($params['url'], ':')) {
+                // Remove scheme. For non-empty url schemes, DriverManager would just reset
+                // the driverClass parameter back to default
+                $params['url'] = substr($params['url'], strpos($params['url'], ':') + 1);
+            }
         }
-
         return parent::createConnection($params, $config, $eventManager, $mappingTypes);
+    }
+
+    /**
+     * @param mixed[] $connectionParams
+     * @return bool
+     */
+    protected function detectPostgreSQL(array $connectionParams)
+    {
+        if (isset($connectionParams['url'])) {
+            $scheme = \parse_url($connectionParams['url'], PHP_URL_SCHEME);
+            /** @see DriverManager::$driverSchemeAliases */
+            return \in_array($scheme, array(
+                'pdo_pgsql',
+                'postgres',
+                'postgresql' => 'pdo_pgsql',
+                'pgsql',
+                'pdo-pgsql',    /** @see DriverManager::parseDatabaseUrlScheme for dash-underscore equivalence */
+            ));
+        }
+        /** @see DriverManager::$_driverMap */
+        if (isset($connectionParams['driver'])) {
+            return $connectionParams['driver'] === 'pdo_pgsql';
+        } elseif (isset($connectionParams['driverClass'])) {
+            return $connectionParams['driverClass'] === 'Doctrine\DBAL\Driver\PDOPgSql\Driver';
+        }
+        return false;
     }
 }
