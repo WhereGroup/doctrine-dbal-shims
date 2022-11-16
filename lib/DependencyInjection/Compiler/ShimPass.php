@@ -4,7 +4,6 @@
 namespace Wheregroup\DoctrineDbalShims\DependencyInjection\Compiler;
 
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 abstract class ShimPass implements ShimPassInterface
@@ -44,7 +43,6 @@ abstract class ShimPass implements ShimPassInterface
     protected static function registerBefore(ContainerBuilder $container, $className)
     {
         $passConfig = $container->getCompilerPassConfig();
-        /** @var CompilerPassInterface[] $searchPasses */
         $searchPasses = $passConfig->getBeforeOptimizationPasses();
         foreach ($searchPasses as $i => $pass) {
             if (is_a($pass, $className, true)) {

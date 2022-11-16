@@ -13,10 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class PassIndex
 {
     /**
-     * @param ContainerBuilder $container
      * @return ShimPass[]
      */
-    public static function getAllPasses(ContainerBuilder $container)
+    public static function getAllPasses()
     {
         return array(
             new ShimPgsql10DriverPass(),
@@ -26,7 +25,7 @@ class PassIndex
 
     public static function autoRegisterAll(ContainerBuilder $container)
     {
-        foreach (static::getAllPasses($container) as $pass) {
+        foreach (static::getAllPasses() as $pass) {
             $pass->autoRegister($container);
         }
     }
