@@ -5,12 +5,12 @@
   "license": "MIT",
   "require": {
     "php": ">=5.3",
-    "doctrine/dbal": "^2"
+    "doctrine/dbal": "^2.7"
   },
   "autoload": {
     "psr-4": { "Wheregroup\\DoctrineDbalShims\\": "lib" }
   },
   "suggest": {
-    "doctrine/dbal-bundle": "To use ShimmedConnectionFactory and compiler passes"
+    "doctrine/dbal-bundle": "To use compiler pass integration"
   }
 }

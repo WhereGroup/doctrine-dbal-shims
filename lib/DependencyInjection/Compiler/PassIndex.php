@@ -18,7 +18,6 @@ class PassIndex
     public static function getAllPasses()
     {
         return array(
-            new ShimPgsql10DriverPass(),
             new AddOracleSesssionInitPass(),
         );
     }
