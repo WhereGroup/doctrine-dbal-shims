@@ -19,7 +19,7 @@ class OnDemandOracleSessionInit extends OracleSessionInit
 {
     public function postConnect(ConnectionEventArgs $args)
     {
-        if ($args->getDriver() instanceof AbstractOracleDriver) {
+        if ($args->getConnection()->getDriver() instanceof AbstractOracleDriver) {
             parent::postConnect($args);
         }
     }
