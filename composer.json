@@ -1,6 +1,6 @@
 {
   "name": "wheregroup/doctrine-dbal-shims",
-  "description": "Extended DBAL server support on outdated PHP versions",
+  "description": "Doctrine DBAL / ORM convenience for mixed multi-connection setups",
   "type": "library",
   "license": "MIT",
   "require": {
