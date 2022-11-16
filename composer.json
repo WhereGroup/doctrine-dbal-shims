@@ -4,7 +4,7 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.5",
     "doctrine/dbal": "^2.7"
   },
   "autoload": {

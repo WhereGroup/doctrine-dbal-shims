@@ -4,6 +4,7 @@
 namespace Wheregroup\DoctrineDbalShims\DependencyInjection\Compiler;
 
 
+use Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterEventListenersAndSubscribersPass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -35,11 +36,10 @@ class AddOracleSesssionInitPass extends ShimPass
         /**
          * Register for execution BEFORE doctrine event listeners are collected and
          * become immutable.
-         * @see \Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterEventListenersAndSubscribersPass::addTaggedSubscribers()
-         * @see \Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterEventListenersAndSubscribersPass::addTaggedListeners()
+         * @see RegisterEventListenersAndSubscribersPass::addTaggedSubscribers()
+         * @see RegisterEventListenersAndSubscribersPass::addTaggedListeners()
          */
-        $insertBeforeClass = 'Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterEventListenersAndSubscribersPass';
-        if (!static::registerBefore($container, $insertBeforeClass)) {
+        if (!static::registerBefore($container, RegisterEventListenersAndSubscribersPass::class)) {
             parent::register($container);
         }
     }
